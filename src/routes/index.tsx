@@ -9,6 +9,7 @@ import docs from "@/assets/docs3d.png";
 import shirt from "@/assets/shirt.png";
 import mug from "@/assets/mug.png";
 import kit from "@/assets/kit.png";
+import landing from "@/assets/landing.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,10 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV = [
-  { href: "#beneficios", label: "Benefícios" },
-  { href: "#loja", label: "Loja" },
-  { href: "#documentos", label: "Documentos" },
-  { href: "#viagens", label: "Viagens" },
+  { href: "#beneficios", label: "Landing page" },
 ];
 
 /* ---------- Site chrome ---------- */
@@ -110,7 +108,7 @@ function Hero() {
           <a href="#beneficios" className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-7 font-semibold text-ink transition-transform hover:-translate-y-0.5">
             Conheça a AAPM <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </a>
-          <a href="#loja" className="inline-flex h-14 items-center px-2 text-foreground/80 underline-offset-8 hover:text-foreground hover:underline">
+          <a href="#beneficios" className="inline-flex h-14 items-center px-2 text-foreground/80 underline-offset-8 hover:text-foreground hover:underline">
             Ver possibilidades
           </a>
         </div>
@@ -256,21 +254,19 @@ function Index() {
       <main className="overflow-x-clip bg-background">
         <Hero />
 
-        <Feature id="beneficios" index="01" kicker="Possibilidades" title="Uma associação." accent="Muitas conexões."
-          text="Benefícios, serviços e oportunidades organizados para cada momento da sua formação."
-          screen={<Screen3D model={cap} modelAlt="Capelo de formatura" modelClass="right-[-6%] top-[-22%] w-[34%]"><BenefitsScreen /></Screen3D>} />
-
-        <Feature id="loja" index="02" kicker="Loja AAPM" title="Produtos com" accent="sua identidade." flip
-          text="Camisetas, canecas e kits do aluno, com categorias para encontrar tudo rapidamente."
-          screen={<Screen3D model={kit} modelAlt="Kit do aluno" modelClass="left-[-8%] bottom-[-18%] w-[30%]"><StoreScreen /></Screen3D>} />
-
-        <Feature id="documentos" index="03" kicker="Área do aluno" title="Documentos" accent="sem filas." light
-          text="Envie arquivos, acompanhe a análise e veja o status de cada documento em um só lugar."
-          screen={<Screen3D model={docs} modelAlt="Pasta de documentos" modelClass="right-[2%] top-[6%] w-[32%]"><DocsScreen /></Screen3D>} />
-
-        <Feature id="viagens" index="04" kicker="Experiências" title="Sua conquista merece" accent="um dia inesquecível." flip
-          text="Parques, excursões e formaturas pensados para celebrar a jornada com quem fez parte dela."
-          screen={<Screen3D model={travel} modelAlt="Mala de viagem" modelClass="right-[-4%] bottom-[-10%] w-[30%]"><TravelScreen /></Screen3D>} />
+        <Feature id="beneficios" index="01" kicker="Landing page" title="A AAPM" accent="em uma só tela."
+          text="Passe o mouse sobre a tela para girá-la e ver a página inteira rolar."
+          screen={
+            <Screen3D model={cap} modelAlt="Capelo de formatura" modelClass="right-[-6%] top-[-22%] w-[30%]">
+              <div className="group h-full overflow-hidden bg-background">
+                <img
+                  src={landing.url}
+                  alt="Landing page da AAPM"
+                  className="w-full animate-[landing-scroll_18s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
+                />
+              </div>
+            </Screen3D>
+          } />
 
         <section id="contato" className="grain relative overflow-hidden bg-red-scene py-28 md:py-40">
           <div className="mx-auto max-w-7xl px-6">
