@@ -33,10 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV = [
-  { href: "#beneficios", label: "Benefícios" },
-  { href: "#loja", label: "Loja" },
-  { href: "#documentos", label: "Documentos" },
-  { href: "#viagens", label: "Viagens" },
+  { href: "#beneficios", label: "Landing page" },
 ];
 
 /* ---------- Site chrome ---------- */
@@ -111,7 +108,7 @@ function Hero() {
           <a href="#beneficios" className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-7 font-semibold text-ink transition-transform hover:-translate-y-0.5">
             Conheça a AAPM <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </a>
-          <a href="#loja" className="inline-flex h-14 items-center px-2 text-foreground/80 underline-offset-8 hover:text-foreground hover:underline">
+          <a href="#beneficios" className="inline-flex h-14 items-center px-2 text-foreground/80 underline-offset-8 hover:text-foreground hover:underline">
             Ver possibilidades
           </a>
         </div>
