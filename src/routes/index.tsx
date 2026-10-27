@@ -249,57 +249,15 @@ function Feature({ id, index, kicker, title, accent, text, screen, flip, light }
 
 function Index() {
   return (
-    <>
-      <Header />
-      <main className="overflow-x-clip bg-background">
-        <Hero />
-
-        <Feature id="beneficios" index="01" kicker="Landing page" title="A AAPM" accent="em uma só tela."
-          text="Passe o mouse sobre a tela para girá-la e ver a página inteira rolar."
-          screen={
-            <Screen3D model={cap} modelAlt="Capelo de formatura" modelClass="right-[-6%] top-[-22%] w-[30%]">
-              <div className="group h-full overflow-hidden bg-background">
-                <img
-                  src={landing.url}
-                  alt="Landing page da AAPM"
-                  className="w-full animate-[landing-scroll_18s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
-                />
-              </div>
-            </Screen3D>
-          } />
-
-        <section id="contato" className="grain relative overflow-hidden bg-red-scene py-28 md:py-40">
-          <div className="mx-auto max-w-7xl px-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Faça parte</p>
-            <h2 className="mt-6 max-w-4xl font-display text-5xl font-extrabold leading-[0.9] tracking-tight md:text-8xl">
-              Conecte-se ao que pode fazer <span className="font-serif font-normal italic text-accent">a diferença.</span>
-            </h2>
-            <a href="#topo" className="group mt-12 inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-7 font-semibold text-ink transition-transform hover:-translate-y-0.5">
-              Fale com a AAPM <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </a>
+    <main className="grain relative grid min-h-[100svh] place-items-center overflow-hidden bg-ink-scene px-6 py-16">
+      <h1 className="sr-only">Landing page da AAPM em 3D</h1>
+      <div className="w-full max-w-5xl">
+        <Screen3D model={cap} modelAlt="Capelo de formatura" modelClass="right-[-6%] top-[-22%] w-[26%]">
+          <div className="h-full overflow-hidden bg-background [container-type:inline-size]">
+            <img src={landing.url} alt="Landing page da AAPM" className="w-full animate-[landing-scroll_18s_ease-in-out_infinite_alternate] motion-reduce:animate-none" />
           </div>
-        </section>
-      </main>
-
-      <footer className="border-t border-border bg-background">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
-          <div className="md:col-span-2">
-            <p className="font-display text-4xl font-extrabold">AAPM<span className="text-primary">.</span></p>
-            <p className="mt-3 max-w-xs text-sm text-muted-foreground">Conexões para sua jornada no SENAI.</p>
-          </div>
-          <nav aria-label="Rodapé">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Navegação</p>
-            <ul className="mt-4 space-y-2 text-sm">
-              {NAV.map((n) => <li key={n.href}><a href={n.href} className="hover:text-primary">{n.label}</a></li>)}
-            </ul>
-          </nav>
-          <div>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Contato</p>
-            <a href="#contato" className="mt-4 inline-block text-sm hover:text-primary">Fale com a AAPM →</a>
-          </div>
-        </div>
-        <p className="mx-auto max-w-7xl px-6 pb-8 text-xs text-muted-foreground">© AAPM</p>
-      </footer>
-    </>
+        </Screen3D>
+      </div>
+    </main>
   );
 }
