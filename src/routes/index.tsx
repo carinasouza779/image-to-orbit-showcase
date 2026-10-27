@@ -33,7 +33,10 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV = [
-  { href: "#beneficios", label: "Landing page" },
+  { href: "#associacao", label: "A AAPM" },
+  { href: "#beneficios", label: "Serviços" },
+  { href: "#etapas", label: "Como participar" },
+  { href: "#duvidas", label: "Dúvidas" },
 ];
 
 /* ---------- Site chrome ---------- */
@@ -247,17 +250,153 @@ function Feature({ id, index, kicker, title, accent, text, screen, flip, light }
   );
 }
 
+function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+  return <div ref={ref} data-visible={visible} className={`reveal ${className}`}>{children}</div>;
+}
+
+function Kicker({ children }: { children: ReactNode }) {
+  return <p className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-primary"><span className="h-px w-8 bg-primary" />{children}</p>;
+}
+
+const FAQ = [
+  ["O que é a AAPM?", "A AAPM é a associação que reúne alunos, famílias e a escola para ampliar benefícios, serviços e oportunidades durante a formação no SENAI."],
+  ["Quais benefícios e serviços estão disponíveis?", "Loja com produtos da AAPM, envio de documentos, viagens, excursões e apoio em eventos como a formatura."],
+  ["Quem pode participar da AAPM?", "Alunos do SENAI e suas famílias."],
+  ["Como faço para solicitar algum serviço?", "Entre em contato com a AAPM pelo botão Fale conosco."],
+  ["Como acompanhar as oportunidades?", "As novidades são divulgadas pela AAPM nos canais oficiais da escola."],
+];
+
 function Index() {
   return (
-    <main className="grain relative grid min-h-[100svh] place-items-center overflow-hidden bg-ink-scene px-6 py-16">
-      <h1 className="sr-only">Landing page da AAPM em 3D</h1>
-      <div className="w-full max-w-5xl">
-        <Screen3D model={cap} modelAlt="Capelo de formatura" modelClass="right-[-6%] top-[-22%] w-[26%]">
-          <div className="h-full overflow-hidden bg-background [container-type:inline-size]">
-            <img src={landing.url} alt="Landing page da AAPM" className="w-full animate-[landing-scroll_18s_ease-in-out_infinite_alternate] motion-reduce:animate-none" />
+    <>
+      <Header />
+      <main className="overflow-x-clip bg-background">
+        <Hero />
+
+        <section id="associacao" className="scroll-mt-20 bg-cream py-24 text-ink md:py-32">
+          <div className="mx-auto grid max-w-7xl gap-14 px-6 md:grid-cols-2">
+            <Reveal>
+              <Kicker>A associação</Kicker>
+              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.95] tracking-tight md:text-6xl">Uma associação. <span className="font-serif font-normal italic text-primary">Muitas conexões.</span></h2>
+              <p className="mt-6 max-w-sm text-ink/65">AAPM — aproximando alunos, oportunidades e benefícios.</p>
+            </Reveal>
+            <div className="grid gap-4 [perspective:1200px]">
+              {[[Gift, "Apoio aos alunos", "Benefícios, serviços e oportunidades em um só lugar."], [Home, "Parceria total", "Escola, alunos e famílias juntos na mesma jornada."], [Star, "Desenvolvimento", "Facilitar o acesso e apoiar o desenvolvimento de cada aluno."], [ArrowUpRight, "Experiência conectada", "Uma experiência mais conectada e acessível."]].map(([I, t, d], i) => {
+                const Icon = I as typeof Gift;
+                return (
+                  <Reveal key={t as string} className="[transition-delay:var(--d)]">
+                    <div style={{ ["--d" as string]: `${i * 90}ms` }} className="flex gap-4 rounded-2xl bg-background/[0.03] p-5 ring-1 ring-ink/10 transition-transform duration-500 hover:[transform:rotateX(6deg)_translateY(-4px)] hover:shadow-screen">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary"><Icon className="size-5" /></span>
+                      <div><p className="font-display font-bold">{t as string}</p><p className="text-sm text-ink/60">{d as string}</p></div>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
-        </Screen3D>
-      </div>
-    </main>
+        </section>
+
+        <section id="beneficios" className="scroll-mt-20 py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <Reveal>
+              <Kicker>Nossas possibilidades</Kicker>
+              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.95] tracking-tight md:text-6xl">Possibilidades para <span className="font-serif font-normal italic text-primary">cada momento.</span></h2>
+            </Reveal>
+            <div className="mt-14 grid gap-6 md:grid-cols-3">
+              {[["Benefícios", "Vantagens pensadas para a sua jornada no SENAI.", cap], ["Serviços", "Loja, documentos e apoio no dia a dia do aluno.", docs], ["Oportunidades", "Viagens, excursões e experiências para celebrar.", travel]].map(([t, d, m]) => (
+                <Screen3D key={t} model={m} modelAlt="" modelClass="right-[-8%] top-[-18%] w-[42%]">
+                  <div className="flex h-full flex-col justify-end bg-ink-scene p-6">
+                    <p className="font-display text-2xl font-extrabold">{t}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">{d}</p>
+                    <a href="#contato" className="mt-4 inline-flex items-center gap-2 text-sm text-primary">Saiba mais <ArrowRight className="size-4" /></a>
+                  </div>
+                </Screen3D>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-cream py-24 text-ink md:py-32">
+          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 md:grid-cols-2">
+            <Screen3D model={cap} modelAlt="Capelo" modelClass="right-[-6%] top-[-20%] w-[30%]">
+              <div className="h-full bg-red-scene"><img src={student} alt="Estudante do SENAI" loading="lazy" className="mx-auto h-full w-auto object-contain object-bottom" /></div>
+            </Screen3D>
+            <Reveal>
+              <Kicker>Formação</Kicker>
+              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.95] tracking-tight md:text-6xl">Sua formação é feita <span className="font-serif font-normal italic text-primary">de encontros.</span></h2>
+              <p className="mt-6 max-w-md text-ink/65">A AAPM aproxima pessoas, cria experiências e fortalece a comunidade escolar.</p>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="etapas" className="scroll-mt-20 py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <Reveal>
+                <Kicker>Como participar</Kicker>
+                <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.95] tracking-tight md:text-6xl">O próximo passo começa <span className="font-serif font-normal italic text-primary">com uma conversa.</span></h2>
+              </Reveal>
+              <a href="#contato" className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 font-semibold text-primary-foreground">Fale conosco <ArrowRight className="size-4" /></a>
+            </div>
+            <ol className="mt-14 grid gap-6 md:grid-cols-3">
+              {[["Conheça as possibilidades", "Veja benefícios, serviços e oportunidades da AAPM."], ["Converse com a AAPM", "Tire dúvidas e entenda como participar."], ["Entenda o próximo passo", "Receba as orientações para seguir."]].map(([t, d], i) => (
+                <Reveal key={t}>
+                  <li className="h-full rounded-2xl bg-card p-7 transition-transform duration-500 hover:-translate-y-1 hover:shadow-glow">
+                    <span className="font-display text-4xl font-extrabold text-primary">0{i + 1}</span>
+                    <p className="mt-6 font-display text-xl font-bold">{t}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">{d}</p>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section id="duvidas" className="scroll-mt-20 bg-cream py-24 text-ink md:py-32">
+          <div className="mx-auto grid max-w-7xl gap-14 px-6 md:grid-cols-12">
+            <Reveal className="md:col-span-4">
+              <Kicker>Perguntas frequentes</Kicker>
+              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.95] tracking-tight md:text-5xl">Vamos esclarecer <span className="font-serif font-normal italic text-primary">suas dúvidas.</span></h2>
+            </Reveal>
+            <div className="md:col-span-8">
+              {FAQ.map(([q, a]) => (
+                <details key={q} className="group border-b border-ink/15 py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-bold">
+                    {q}<span className="text-2xl text-primary transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 max-w-xl text-ink/65">{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contato" className="grain relative overflow-hidden bg-red-scene py-28 md:py-36">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-10 px-6">
+            <h2 className="max-w-3xl font-display text-5xl font-extrabold leading-[0.9] tracking-tight md:text-7xl">Conecte-se ao que pode fazer <span className="font-serif font-normal italic text-accent">a diferença.</span></h2>
+            <a href="#topo" className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-7 font-semibold text-ink">Fale com a AAPM <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></a>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-border bg-background">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
+          <div className="md:col-span-2">
+            <p className="font-display text-4xl font-extrabold">AAPM<span className="text-primary">.</span></p>
+            <p className="mt-3 max-w-xs text-sm text-muted-foreground">Conexões para sua jornada no SENAI.</p>
+          </div>
+          <nav aria-label="Rodapé">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground">Navegação</p>
+            <ul className="mt-4 space-y-2 text-sm">{NAV.map((n) => <li key={n.href}><a href={n.href} className="hover:text-primary">{n.label}</a></li>)}</ul>
+          </nav>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground">Contato</p>
+            <a href="#contato" className="mt-4 inline-block text-sm hover:text-primary">Fale com a AAPM →</a>
+          </div>
+        </div>
+        <p className="mx-auto max-w-7xl px-6 pb-8 text-xs text-muted-foreground">© AAPM</p>
+      </footer>
+    </>
   );
 }
