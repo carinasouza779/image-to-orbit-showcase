@@ -305,7 +305,7 @@ function Index() {
             </Reveal>
             <div className="mt-14 grid gap-6 md:grid-cols-3">
               {[["Benefícios", "Vantagens pensadas para a sua jornada no SENAI.", cap], ["Serviços", "Loja, documentos e apoio no dia a dia do aluno.", docs], ["Oportunidades", "Viagens, excursões e experiências para celebrar.", travel]].map(([t, d, m]) => (
-                <Screen3D key={t} model={m} modelAlt="" modelClass="right-[-8%] top-[-18%] w-[42%]">
+                <Screen3D key={t} model={m as string} modelAlt="" modelClass="right-[-8%] top-[-18%] w-[42%]">
                   <div className="flex h-full flex-col justify-end bg-ink-scene p-6">
                     <p className="font-display text-2xl font-extrabold">{t}</p>
                     <p className="mt-2 text-sm text-muted-foreground">{d}</p>
